@@ -16,8 +16,10 @@ steps:
 
 - script: |
     docker build -t $(imageName):$(Build.BuildId) .
-  displayName: 'Build Docker image'
+    docker tag $(imageName):$(Build.BuildId) Felison01/$(imageName):latest
+  displayName: 'Build and Tag Docker Image'
 
 - script: |
-    docker images
-  displayName: 'List Docker images'
+    echo "$(DOCKERHUB_PASSWORD)" | docker login -u "$(DOCKERHUB_USERNAME)" --password-stdin
+    docker push Felison01/$(imageName):latest
+  displayName: 'Push to Docker Hub'
