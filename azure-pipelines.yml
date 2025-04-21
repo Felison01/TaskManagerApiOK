@@ -1,0 +1,23 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  imageName: taskmanagerapi
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: |
+    docker build -t $(imageName):$(Build.BuildId) .
+  displayName: 'Build Docker image'
+
+- script: |
+    docker images
+  displayName: 'List Docker images'
