@@ -9,7 +9,7 @@ namespace TaskManagerApi.Controllers
     {
         private static List<TaskItem> tasks = new List<TaskItem>
         {
-            new TaskItem { Id = 1, Title = "Learn DevOps", IsCompleted = false },
+            new TaskItem { Id = 1, Title = "Learn ", IsCompleted = false },
             new TaskItem { Id = 2, Title = "Build .NET API", IsCompleted = true }
         };
 
